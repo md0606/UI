@@ -3,7 +3,7 @@
 #author=mengd
 
 import unittest
-
+import pytest
 from page.sina import *
 from page.init import *
 # from  selenium import webdriver
@@ -13,7 +13,7 @@ from utills.operationXml import *
 
 
 class SinaTest(Init,Sina):
-
+    @pytest.mark.parametrize('execution_number', range(3))
     def test_sinaLogin_001(self,parent='divText',value='emailNull'):
         '''
         登录业务账号密码都为空
@@ -22,6 +22,7 @@ class SinaTest(Init,Sina):
         self.assertEqual(self.getLoginError,self.getXmlUser(parent,value))
         print(self.getLoginError)
 
+    @pytest.mark.parametrize('execution_number', range(3))
     def test_sinaLogin_002(self,parent='divText',value='emailFormat'):
         '''
         登录业务：输入不正确的用户名密码
